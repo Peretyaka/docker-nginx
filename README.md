@@ -28,7 +28,7 @@ Possible values:
 
 ## Usage
 
-## Build
+### Build
 
 Multistage build for React/Vue SPA app closed from robots.
 
@@ -52,18 +52,17 @@ ENV APP_TYPE=spa
 ENV DISALLOW_ROBOTS=1
 COPY --from=build /app/public /usr/share/nginx/html
 ```
-Build
 ```
 $ docker build -t my-static-app .
 ```
 
-## Docker
+### Docker
 
 ```
 $ docker run -p 8080:80 -v ./public:/usr/share/nginx/html -e APP_TYPE=ssg malevichstudio/nginx
 ```
 
-## Docker Compose
+### Docker Compose
 
 ```
 services:
