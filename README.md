@@ -34,14 +34,14 @@ Multistage build for React/Vue SPA app closed from robots.
 
 Dockerfile
 ```
-ARG NGINX_VERSION="22.2.0"
+ARG NODE_VERSION="22.2.0"
 
-FROM node:${NGINX_VERSION} as dependencies
+FROM node:${NODE_VERSION} as dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm i
 
-FROM node:${NGINX_VERSION} as build
+FROM node:${NODE_VERSION} as build
 WORKDIR /app
 COPY ./ ./
 COPY --from=dependencies /app/node_modules ./node_modules
