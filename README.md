@@ -34,20 +34,20 @@ Multistage build for React/Vue SPA app closed from robots.
 
 Dockerfile
 ```
-ARG NGINX_VERSION="22.2.0"
+ARG NODE_VERSION="22.2.0"
 
-FROM node:${NGINX_VERSION} as dependencies
+FROM node:${NODE_VERSION} as dependencies
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm i
 
-FROM node:${NGINX_VERSION} as build
+FROM node:${NODE_VERSION} as build
 WORKDIR /app
 COPY ./ ./
 COPY --from=dependencies /app/node_modules ./node_modules
 RUN npm run build
 
-FROM malevichstudio/nginx:1.27.0
+FROM malevichstudio/nginx:1.27.2
 ENV APP_TYPE=spa
 ENV DISALLOW_ROBOTS=1
 COPY --from=build /app/public /usr/share/nginx/html
@@ -68,7 +68,7 @@ $ docker run -p 8080:80 -v ./public:/usr/share/nginx/html -e APP_TYPE=ssg malevi
 services:
 
   files:
-    image: malevichstudio/nginx:1.27.0
+    image: malevichstudio/nginx:1.27.2
     ports:
       - 8081:80
     volumes:

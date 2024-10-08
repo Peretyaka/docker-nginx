@@ -1,4 +1,4 @@
-ARG NGINX_VERSION="1.27.0"
+ARG NGINX_VERSION="1.27.2"
 
 FROM nginx:${NGINX_VERSION}
 COPY --chmod=0555 docker-entrypoint.d/ /docker-entrypoint.d/
